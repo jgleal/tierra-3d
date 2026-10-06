@@ -1,0 +1,42 @@
+
+@font-face{font-family:N;src:url(node_modules/@fontsource/nunito/files/nunito-latin-700-normal.woff2) format('woff2');font-weight:700}
+@font-face{font-family:N;src:url(node_modules/@fontsource/nunito/files/nunito-latin-900-normal.woff2) format('woff2');font-weight:900}
+@font-face{font-family:N;src:url(node_modules/@fontsource/nunito/files/nunito-latin-400-normal.woff2) format('woff2');font-weight:400}
+html,body{margin:0;width:1920px;height:1080px;overflow:hidden;background:#02040c;font-family:N,sans-serif;color:#fff}
+canvas{position:absolute;left:0;top:0}
+#ui{position:absolute;inset:0;pointer-events:none}
+.lbl{position:absolute;white-space:nowrap;font-weight:700;font-size:27px;padding:6px 14px;border-radius:12px;
+ background:rgba(8,16,36,.78);border:2px solid rgba(255,255,255,.25);transform:translate(-50%,-50%);line-height:1.15;text-align:center}
+.lbl small{display:block;font-size:21px;font-weight:400;opacity:.9}
+#cap{position:absolute;left:50%;bottom:46px;width:1560px;transform:translateX(-50%);
+ background:rgba(6,12,30,.86);border:2px solid rgba(120,190,255,.35);border-radius:26px;padding:26px 40px 30px;box-sizing:border-box;
+ font-size:41px;line-height:1.32;font-weight:700;text-align:center;min-height:150px;display:flex;align-items:center;justify-content:center}
+#cap b{color:#ffd23f}
+#cap i{font-style:normal;color:#7fd3ff}
+#chip{position:absolute;left:54px;top:44px;font-size:32px;font-weight:900;padding:12px 26px;border-radius:40px;
+ background:linear-gradient(90deg,#2563eb,#7c3aed);box-shadow:0 6px 24px rgba(0,0,0,.4)}
+#chip span{opacity:.75;margin-right:10px}
+.card{position:absolute;background:rgba(6,12,30,.88);border:2px solid rgba(120,190,255,.35);border-radius:26px;padding:28px 36px;box-sizing:border-box}
+#title{left:50%;top:50%;transform:translate(-50%,-50%);text-align:center;width:1500px;background:rgba(6,12,30,.72)}
+#title h1{font-size:92px;font-weight:900;margin:0 0 10px;background:linear-gradient(90deg,#7fd3ff,#ffd23f);-webkit-background-clip:text;color:transparent}
+#title p{font-size:42px;margin:6px 0;font-weight:700}
+#title .lvl{font-size:30px;opacity:.8;font-weight:400;margin-top:18px}
+#formula{right:60px;top:150px;width:560px;text-align:center}
+#formula .big{font-size:58px;font-weight:900;color:#ffd23f}
+#formula .sub{font-size:30px;margin-top:8px}
+#formula .ctr{font-size:46px;font-weight:900;margin-top:18px;color:#7fd3ff}
+#clocks{right:60px;top:140px;width:520px}
+#clocks h3{margin:0 0 14px;font-size:30px;font-weight:900;color:#7fd3ff}
+.row{display:flex;justify-content:space-between;align-items:center;font-size:34px;font-weight:700;margin:10px 0}
+.row .t{font-weight:900;font-size:40px;font-variant-numeric:tabular-nums}
+.row .u{font-size:22px;opacity:.75;margin-left:10px;font-weight:400}
+#summary{right:60px;top:90px;width:980px}
+#summary h2{margin:0 0 18px;font-size:50px;font-weight:900;color:#ffd23f}
+#summary li{font-size:31px;line-height:1.28;margin:0 0 16px;list-style:none;position:relative;padding-left:46px}
+#summary li:before{content:"";position:absolute;left:4px;top:12px;width:22px;height:22px;border-radius:50%;background:var(--c)}
+#summary b{color:var(--c)}
+#end{left:50%;top:50%;transform:translate(-50%,-50%);text-align:center;width:1400px}
+#end h1{font-size:76px;font-weight:900;margin:0;color:#ffd23f}
+#end p{font-size:38px;margin:16px 0 0}
+#fade{position:absolute;inset:0;background:#000;opacity:0}
+#bar{position:absolute;left:0;bottom:0;height:8px;background:linear-gradient(90deg,#2563eb,#ffd23f)}

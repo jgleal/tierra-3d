@@ -1,0 +1,8 @@
+{
+  "name": "tierra-3d",
+  "private": true,
+  "description": "Animación 3D educativa (1.º ESO): ecuador, paralelos, meridianos, latitud, longitud, husos horarios y estaciones",
+  "scripts": { "build": "cd src && python3 build_player.py" },
+  "dependencies": { "three": "^0.186.1", "@fontsource/nunito": "^5.3.0", "d3-geo": "^3.1.0", "d3-array": "^3.2.0", "topojson-client": "^3.1.0", "world-atlas": "^2.0.2" },
+  "devDependencies": { "esbuild": "^0.28.2" }
+}

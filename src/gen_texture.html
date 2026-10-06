@@ -1,0 +1,30 @@
+<!doctype html><html><body><canvas id="c" width="4096" height="2048"></canvas>
+<script src="./node_modules/d3-array/dist/d3-array.min.js"></script><script src="./node_modules/d3-geo/dist/d3-geo.min.js"></script><script src="./node_modules/topojson-client/dist/topojson-client.min.js"></script><script type="module">
+const W=4096,H=2048;
+const c=document.getElementById('c'), g=c.getContext('2d');
+const world=await (await fetch('./node_modules/world-atlas/countries-50m.json')).json();
+const land=topojson.feature(world, world.objects.land);
+const countries=topojson.feature(world, world.objects.countries);
+const borders=topojson.mesh(world, world.objects.countries,(a,b)=>a!==b);
+const proj=d3.geoEquirectangular().scale(W/(2*Math.PI)).translate([W/2,H/2]);
+const path=d3.geoPath(proj,g);
+// ocean
+const og=g.createLinearGradient(0,0,0,H);
+og.addColorStop(0,'#1d4f8a');og.addColorStop(0.5,'#2a7fc4');og.addColorStop(1,'#1d4f8a');
+g.fillStyle=og;g.fillRect(0,0,W,H);
+// shallow halo
+g.save();g.beginPath();path(land);g.strokeStyle='rgba(120,200,240,0.55)';g.lineWidth=14;g.lineJoin='round';g.stroke();g.restore();
+// land
+g.save();g.beginPath();path(land);g.clip();
+const lg=g.createLinearGradient(0,0,0,H);
+lg.addColorStop(0.00,'#e9eef2');lg.addColorStop(0.12,'#dfe7e0');lg.addColorStop(0.20,'#8db26a');
+lg.addColorStop(0.32,'#6fa84f');lg.addColorStop(0.40,'#c9b273');lg.addColorStop(0.47,'#4f9a3e');
+lg.addColorStop(0.53,'#3f8f35');lg.addColorStop(0.60,'#c2aa6a');lg.addColorStop(0.68,'#7aa956');
+lg.addColorStop(0.80,'#9cb98a');lg.addColorStop(0.86,'#eef3f6');lg.addColorStop(1,'#f4f7f9');
+g.fillStyle=lg;g.fillRect(0,0,W,H);
+for(const f of countries.features){ if(f.id==='304'||f.id==='010'){g.beginPath();path(f);g.fillStyle='#f2f6f8';g.fill();} }
+g.restore();
+g.beginPath();path(borders);g.strokeStyle='rgba(60,70,40,0.35)';g.lineWidth=1.6;g.stroke();
+g.beginPath();path(land);g.strokeStyle='rgba(30,60,30,0.6)';g.lineWidth=2;g.stroke();
+window.done=true;
+</script></body></html>
