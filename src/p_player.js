@@ -57,3 +57,4 @@ addEventListener('keydown',e=>{if(e.target.tagName==='SELECT'||e.target.tagName=
  else if(e.key==='m'||e.key==='M')btnMus.click();else if(e.key==='f'||e.key==='F')btnFs.click();wake();});
 window.__player={go,get T(){return T},get playing(){return playing},audio:()=>({state:actx&&actx.state,buf:!!mbuf,src:!!src})};
 go(0);requestAnimationFrame(loop);
+requestAnimationFrame(()=>requestAnimationFrame(()=>{document.body.classList.add('ready');setTimeout(()=>{const l=document.getElementById('loader');if(l)l.remove();},700);}));

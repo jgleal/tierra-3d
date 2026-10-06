@@ -49,10 +49,45 @@ bar='''<div id="pl-bar" role="toolbar" aria-label="Controles del vídeo">
  <button id="pl-fs" type="button" title="Pantalla completa (F)">⛶</button>
 </div>
 <button id="pl-start" type="button" aria-label="Comenzar"><span>▶ Comenzar</span></button>'''
-body=f'''<div id="stage">{ui}</div>
+loader='''<div id="loader" role="status" aria-live="polite"><div class="ld-globe"><i></i><i></i><i></i></div><p>Cargando la Tierra…</p></div>'''
+body=f'''{loader}
+<div id="stage">{ui}</div>
 {bar}
 <script>window.__EARTH="{earth}";window.__MUSIC="{music}";</script>
 <script type="module">{bundle}</script>'''
-head='<title>¿Dónde estoy en la Tierra?</title>\n<style>'+css+'</style>\n'
+URL='https://jgleal.github.io/tierra-3d/'
+DESC='Animación 3D interactiva para 1.º de ESO: ecuador, paralelos, meridianos, Greenwich, latitud, longitud, husos horarios y estaciones.'
+FAV="data:image/svg+xml,"+__import__('urllib.parse').parse.quote('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><circle cx="32" cy="32" r="29" fill="#2a7fc4"/><ellipse cx="32" cy="32" rx="12" ry="29" fill="none" stroke="#fff" stroke-width="3"/><path d="M3 32h58" stroke="#ffd23f" stroke-width="4"/><path d="M8 18h48M8 46h48" stroke="#fff" stroke-width="2.5"/></svg>')
+meta=f"""<meta name="description" content="{DESC}">
+<meta name="theme-color" content="#02040c">
+<link rel="icon" href="{FAV}">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_ES">
+<meta property="og:title" content="¿Dónde estoy en la Tierra?">
+<meta property="og:description" content="{DESC}">
+<meta property="og:url" content="{URL}">
+<meta property="og:image" content="{URL}og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Globo terráqueo en 3D con paralelos, meridianos y el título ¿Dónde estoy en la Tierra?">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="¿Dónde estoy en la Tierra?">
+<meta name="twitter:description" content="{DESC}">
+<meta name="twitter:image" content="{URL}og-image.png">
+"""
+LCSS="""
+#loader{position:fixed;inset:0;z-index:20;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px;background:#02040c;color:#cfe0ff;font:700 20px/1.2 N,system-ui,sans-serif;transition:opacity .5s}
+#loader p{margin:0;letter-spacing:.02em}
+.ld-globe{position:relative;width:96px;height:96px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#4fa3e8,#1d4f8a 70%);box-shadow:0 0 40px rgba(80,160,255,.35);overflow:hidden}
+.ld-globe i{position:absolute;top:0;bottom:0;width:30px;margin-left:-15px;border:2px solid rgba(255,255,255,.55);border-radius:50%;animation:ld 2.4s linear infinite}
+.ld-globe i:nth-child(2){animation-delay:-.8s}.ld-globe i:nth-child(3){animation-delay:-1.6s}
+.ld-globe:after{content:"";position:absolute;left:0;right:0;top:calc(50% - 2px);height:4px;background:#ffd23f}
+@keyframes ld{from{left:-10%;transform:scaleX(.3)}50%{transform:scaleX(1)}to{left:110%;transform:scaleX(.3)}}
+body:not(.ready) #stage,body:not(.ready) #pl-bar,body:not(.ready) #pl-start{visibility:hidden}
+body.ready #loader{opacity:0;pointer-events:none}
+@media (prefers-reduced-motion:reduce){.ld-globe i{animation:none}}
+"""
+head='<title>¿Dónde estoy en la Tierra?</title>\n'+meta+'<style>'+css+LCSS+'</style>\n'
+art_head='<title>¿Dónde estoy en la Tierra?</title>\n<style>'+css+LCSS+'</style>\n'
 open('../index.html','w').write('<!doctype html>\n<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">\n'+head+'</head><body>\n'+body+'\n</body></html>')
-
+if os.environ.get('ART'):open(os.environ['ART'],'w').write(art_head+body)
